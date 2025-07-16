@@ -1,11 +1,8 @@
 import express from "express";
 import mongoose from "mongoose";
-import Product from "./models/product.js";
-import productRouter from "./routes/productRouter.js";
 import userRouter from "./routes/userRouter.js";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
-
 dotenv.config()
 
 const app = express()
@@ -34,6 +31,7 @@ app.use(
 //Connection String
 const connectionString = process.env.MONGO_DB_URL
 
+
 mongoose.connect(connectionString).then(
     ()=>{
         console.log("Database connected.")
@@ -45,7 +43,7 @@ mongoose.connect(connectionString).then(
 )
 
 
-app.use("/api/products", productRouter)
+
 app.use("/api/users", userRouter)
 
 app.listen(5000, ()=>{ 
