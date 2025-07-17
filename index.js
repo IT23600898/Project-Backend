@@ -17,7 +17,7 @@ app.use(
     console.log(token)
 
     if(token != null){
-        jwt.verify(token, process.env.SECRET, (error, decoded)=>{
+        jwt.verify(token, process.env.SECRET,(error, decoded)=>{
             if(!error){
                 req.user = decoded
             }
@@ -28,19 +28,33 @@ app.use(
     }
 )
 
-//Connection String
-const connectionString = process.env.MONGO_DB_URL
+// //Connection String
+// const connectionString = process.env.MONGO_DB_URL
 
 
-mongoose.connect(connectionString).then(
-    ()=>{
-        console.log("Database connected.")
-    }
-).catch(
-    ()=>{
-        console.log("Database connection failed.")
-    }
-)
+
+// mongoose.connect(connectionString).then(
+//     ()=>{
+//         console.log("Database connected.")
+//     }
+// ).catch(
+//     ()=>{
+//         console.log("Database connection failed.")
+//     }
+// )
+
+// Connection String
+const connectionString = process.env.MONGO_DB_URL;
+
+mongoose.connect(connectionString)
+    .then(() => {
+        console.log("✅ Database connected.");
+    })
+    .catch((err) => {
+        console.log("Database connection failed.");
+        console.log("Error details:", err.message);
+    });
+
 
 
 
