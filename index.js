@@ -28,21 +28,6 @@ app.use(
     }
 )
 
-// //Connection String
-// const connectionString = process.env.MONGO_DB_URL
-
-
-
-// mongoose.connect(connectionString).then(
-//     ()=>{
-//         console.log("Database connected.")
-//     }
-// ).catch(
-//     ()=>{
-//         console.log("Database connection failed.")
-//     }
-// )
-
 // Connection String
 const connectionString = process.env.MONGO_DB_URL;
 
