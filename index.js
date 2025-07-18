@@ -1,6 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import userRouter from "./routes/userRouter.js";
+import productRouter from "./models/product.js";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 dotenv.config()
@@ -44,6 +45,7 @@ mongoose.connect(connectionString)
 
 
 app.use("/api/users", userRouter)
+app.use("/api/products", productRouter)
 
 app.listen(5000, ()=>{ 
     console.log("Server is started.")
