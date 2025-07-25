@@ -1,5 +1,5 @@
-import Product from "../models/products";
-import { isAdmin } from "./userController";
+import Product from "../models/products.js";
+import { isAdmin } from "./userController.js";
 
 export function createProduct(req, res){
     
@@ -7,7 +7,9 @@ export function createProduct(req, res){
         res.json({
             message: "Please login as a administrator to add products"
         })
+        return
     }
+
     const newProductData = req.body
 
     const product = new Product(newProductData)
