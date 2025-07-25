@@ -23,3 +23,18 @@ export function createProduct(req, res){
     })
 }
 
+export function getProducts(req, res){
+
+    User.find().then(
+        (productList)=>{
+            res.json({
+                List: productList
+            })
+        }
+    ).catch((error)=>{
+        res.json({
+            message: error
+        })
+    })
+}
+
