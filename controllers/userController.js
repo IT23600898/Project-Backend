@@ -60,6 +60,28 @@ export function createUser(req, res){
     })
  }
 
+// export function createUser(req, res) {
+//     const newUserData = req.body;
+
+//     // Hash the password
+//     newUserData.password = bcrypt.hashSync(newUserData.password, 10);
+
+//     // Create and save the new user
+//     const user = new User(newUserData);
+
+//     user.save()
+//         .then(() => {
+//             res.json({
+//                 message: "User created successfully."
+//             });
+//         })
+//         .catch(() => {
+//             res.json({
+//                 message: "User creation failed."
+//             });
+//         });
+// }
+
  export function deleteUser(req, res){
     User.deleteOne({name: req.params.email}).then(()=>{
         res.json({

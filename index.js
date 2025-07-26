@@ -21,6 +21,7 @@ app.use(
         jwt.verify(token, process.env.SECRET,(error, decoded)=>{
             if(!error){
                 req.user = decoded
+                console.log(decoded)
             }
         })
     }
@@ -53,3 +54,5 @@ app.listen(5000, ()=>{
 })
 
 
+//"email": "rashmini.kavindya@example.com" - admin
+//"password": "Test@1234",
