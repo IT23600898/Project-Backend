@@ -3,7 +3,7 @@ import { isCustomer } from "./userController.js"
 
 export async function createOrder(req, res){
 
-    if(!isCustomer){
+    if(!isCustomer(req)){
         res.json({
             message : "Please login as customer to create orders"
         })
@@ -27,7 +27,7 @@ export async function createOrder(req, res){
         }
 
         
-        newOrderData = req.body
+        const newOrderData = req.body
         newOrderData.orderId = orderId
         newOrderData.email = req.user.email
 

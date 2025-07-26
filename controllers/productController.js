@@ -1,8 +1,12 @@
-import Product from "../models/products.js";
+import Product from "../models/product.js";
 import { isAdmin } from "./userController.js";
 
-export function createProduct(req, res){
-    
+//  function isAdmin(req){
+//         return req.user && req.use.role === "admin";
+//     }
+
+   export function createProduct(req, res){
+   
     if(!isAdmin(req)){
         res.json({
             message: "Please login as a administrator to add products"
@@ -27,7 +31,7 @@ export function createProduct(req, res){
 
 export function getProducts(req, res){
 
-    User.find().then(
+    Product.find().then(
         (productList)=>{
             res.json({
                 List: productList

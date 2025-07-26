@@ -7,12 +7,12 @@ const productSchema = mongoose.Schema({
     unique: true
   },
   productName: {
-    type: String,
+    type: [String],
     required: true
   },
   alternativeName: [ //this is array
     {
-    type: String,
+    type: [String],
     required: true
     }
   ],
