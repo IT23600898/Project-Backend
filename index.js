@@ -58,3 +58,6 @@ app.listen(5000, ()=>{
 
 //"email": "rashmini.kavindya@example.com" - admin
 //"password": "Test@1234",
+
+// "email": "kamal.perera@example.com" - customer
+//  "password": "KamalPass2024"

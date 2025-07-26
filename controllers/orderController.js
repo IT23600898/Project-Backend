@@ -45,3 +45,18 @@ export async function createOrder(req, res){
         })
     }
 }
+
+export  function getOrder(req, res){
+
+    Order.find().then(
+        (orderList)=>{
+            res.json({
+                List: orderList
+            })
+        }
+    ).catch((error)=>{
+        res.json({
+            message: error
+        })
+    })
+}
