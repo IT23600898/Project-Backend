@@ -1,4 +1,5 @@
 import Order from "../models/order.js"
+import Product from "../models/product.js"
 import { isCustomer } from "./userController.js"
 
 export async function createOrder(req, res){
@@ -10,14 +11,15 @@ export async function createOrder(req, res){
         return
     }
 
-    //take the latest product id
+    
     try{
+        //take the latest product id
         const latestOrder = await Order.find().sort({date : -1}).limit(1)
 
         let orderId
 
         if(latestOrder.length == 0 ){
-            orderId = "CBC001"
+            orderId = "CBC0001"
         }else{
             const currentOrderId = latestOrder[0].orderId
             const numberString  = currentOrderId.replace("CBC", "")
@@ -28,6 +30,38 @@ export async function createOrder(req, res){
 
         
         const newOrderData = req.body
+
+        const newProductArray = []
+
+        for(let i = 0; i < newOrderData.orderedItems.length; i++ ){
+            
+            const product = await Product.findOne({
+                productId : newOrderData.orderedItems[i].productId
+            })
+
+            console.log(product)
+
+            if(product == null){
+                res.json({
+                    message: "Order with id "+newOrderData.orderedItems[i].productId+" not found."
+                })
+                return
+            }
+
+            newProductArray[i] = {
+                productId: product.productId,
+                name: product.productName,
+                price: product.price,
+                quantity: newOrderData.orderedItems[i].quantity,
+                image: product.images[0]
+            }
+        }
+
+        console.log(newProductArray)
+
+        newOrderData.orderedItems = newProductArray
+       
+
         newOrderData.orderId = orderId
         newOrderData.email = req.user.email
 

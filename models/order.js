@@ -10,8 +10,9 @@ const orderSchema = mongoose.Schema({
         type : String,
         required : true
     },
-    orederedItems : [
+    orderedItems : [
         {
+            
             name : {
                 type : String,
                 required : true
