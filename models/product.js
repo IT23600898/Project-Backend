@@ -10,13 +10,13 @@ const productSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  alternativeName: [ //this is array
+  alternativeName: [ // array of alternative names
     {
-    type: [String],
-    required: true
+      type: [String],
+      required: true
     }
   ],
-  images: { //this is array
+  images: { // array of image URLs or paths
     type: [String],
     required: true
   },
@@ -28,12 +28,17 @@ const productSchema = mongoose.Schema({
     type: Number,
     required: true
   },
+  stock: { // new stock field
+    type: Number,
+    required: true,
+    min: 0 // prevents negative stock values
+  },
   description: {
     type: String,
     required: true
   }
 });
 
-const Product =  mongoose.model("products", productSchema);
+const Product = mongoose.model("products", productSchema);
 
 export default Product;

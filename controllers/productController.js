@@ -23,7 +23,7 @@ import { isAdmin } from "./userController.js";
             message: "Product Created."
         })
     }).catch((error)=>{
-        res.json({
+        res.status(403).json({
             message: error
         })
     })
@@ -44,3 +44,25 @@ export function getProducts(req, res){
     })
 }
 
+export function deleteProduct(req, res){
+    if(!isAdmin(req)){
+        res.status(403).json({
+            message: "Please login a administrator to delete products"
+        })
+        return
+    }
+    const productId = req.params.productId
+
+    Product.deleteOne(
+        {productId : productId}
+    ).then(()=>{
+        res.status(200).json({
+            message: "Product Deleted."
+        })
+    }).catch((err)=>{
+        res.status(500).json({
+            message: err
+        })
+    })
+
+}
