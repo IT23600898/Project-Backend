@@ -5,7 +5,7 @@ import { isAdmin } from "./userController.js";
 //         return req.user && req.use.role === "admin";
 //     }
 
-   export function createProduct(req, res){
+export function createProduct(req, res){
    
     if(!isAdmin(req)){
         res.json({
@@ -66,3 +66,52 @@ export function deleteProduct(req, res){
     })
 
 }
+
+export function updateProduct(req, res){
+    if(!isAdmin(req)){
+        res.status(403).json({
+            message: "Please login as an administrator to update products"
+        })
+        return
+    }
+
+    const productId = req.params.productId
+    const updatedData = req.body
+
+    Product.updateOne(
+        { productId: productId }, // filter
+        updatedData               // new data
+    ).then(()=>{
+        res.status(200).json({
+            message: "Product Updated."
+        })
+    }).catch((err)=>{
+        res.status(500).json({
+            message: err
+        })
+    })
+}
+
+export function getProductById(req, res){
+    const productId = req.params.productId;
+
+    Product.findOne({ productId: productId })
+        .then((product)=>{
+            if(!product){
+                res.status(404).json({
+                    message: "Product not found"
+                });
+                return;
+            }
+            res.status(200).json({
+                product: product
+            });
+        })
+        .catch((err)=>{
+            res.status(500).json({
+                message: err
+            });
+        });
+}
+
+
